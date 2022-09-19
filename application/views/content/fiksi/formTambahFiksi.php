@@ -18,23 +18,23 @@
 									<form id="form-tambah-fiksi" method="post" action="<?= site_url('FiksiController/insert') ?>" enctype="multipart/form-data">
 										<div class="mb-3">
 											<label class="form-label">Kode Fiksi</label>
-											<input require type="text" class="form-control" name="kode_fiksi" placeholder="Masukkan Kode Buku" />
+											<input require type="text" class="form-control" name="kode_fiksi" placeholder="Masukkan Kode Fiksi" />
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Judul Fiksi</label>
-											<input require type="text" class="form-control" name="judul_fiksi" placeholder="Masukkan Judul Buku" />
+											<input require type="text" class="form-control" name="judul_fiksi" placeholder="Masukkan Judul Fiksi" />
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Pengarang Fiksi</label>
-											<input require type="text" class="form-control" name="pengarang_fiksi" placeholder="Masukkan Pengarang Buku" />
+											<input require type="text" class="form-control" name="pengarang_fiksi" placeholder="Masukkan Pengarang Fiksi" />
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Klasifikasi Fiksi</label>
-											<input require type="text" class="form-control" name="klasifikasi_fiksi" placeholder="Masukkan Penerbit Buku" />
+											<input require type="text" class="form-control" name="klasifikasi_fiksi" placeholder="Masukkan Klasifikasi Fiksi" />
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Sumber Asal Buku</label>
-											<select class="form-control" name="sumber_asal_buku" >
+											<label class="form-label">Sumber Asal Fiksi</label>
+											<select class="form-control" name="sumber_asal_Fiksi" >
 												<option value="Beli">Beli</option>
 												<option value="Hadiah">Hadiah</option>
 											</select>
@@ -57,12 +57,11 @@
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Keterangan Fiksi</label>
-											<input require type="date" class="form-control" name="keterangan_fiksi" placeholder="Masukkan Tahun Terbit Buku" />
+											<input require type="date" class="form-control" name="keterangan_fiksi" placeholder="Masukkan Keterangan Fiksi" />
 										</div>
-
                                         <div class="mb-3">
 											<label class="form-label">Jumlah Fiksi</label>
-											<input require type="text" class="form-control" name="jumlah_fiksi" placeholder="Masukkan Jumlah Buku" />
+											<input require type="text" class="form-control" name="jumlah_fiksi" placeholder="Masukkan Jumlah Fiksi" />
 										</div>
 									</form>
 									<button type="button" id="btn-save-fiksi" class="btn btn-success btn-sm">

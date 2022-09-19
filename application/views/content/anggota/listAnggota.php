@@ -25,10 +25,10 @@
 				<thead>
 				<tr>
 					<th>No</th>
-					<th>ID Anggota</th>
-					<th>Nama Anggota</th>
-					<th>Alamat Anggota</th>
-					<th>No Telepon Anggota</th>
+					<th>ID</th>
+					<th>Nama</th>
+					<th>Alamat</th>
+					<th>No Telepon</th>
 					<th>Action</th>
 				</tr>
 				</thead>

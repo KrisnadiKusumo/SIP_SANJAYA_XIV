@@ -24,16 +24,17 @@
 								<thead>
 								<tr>
 									<th>No</th>
-									<th>Kode Fiksi</th>
-									<th>Judul Fiksi</th>
-									<th>Pengarang Fiksi</th>
-									<th>Klasifikasi Fiksi</th>
-									<th>Sumber Asal Fiksi</th>
-									<th>Bahasa Fiksi</th>
-									<th>Macam Fiksi</th>
-									<th>Harga Fiksi</th>
-									<th>Keterangan Fiksi</th>
-									<th>Jumlah Fiksi</th>
+									<th>Kode</th>
+									<th>Judul</th>
+									<th>Pengarang</th>
+									<th>Klasifikasi</th>
+									<th>Sumber Asal</th>
+									<th>Bahasa</th>
+									<th>Macam</th>
+									<th>Harga</th>
+									<th>Keterangan</th>
+									<th>Jumlah</th>
+									<th>Action</th>
 								</tr>
 								</thead>
 								<tbody class="table-border-bottom-0">

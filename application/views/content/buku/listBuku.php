@@ -24,13 +24,14 @@
 				<thead>
 				<tr>
 					<th>No</th>
-					<th>Kode Buku</th>
-					<th>Judul Buku</th>
-					<th>Pengarang Buku</th>
-					<th>Penerbit Buku</th>
-					<th>Tahun Terbit Buku</th>
-					<th>Sumber Asal Buku</th>
-					<th>Jumlah Buku</th>
+					<th>Kode</th>
+					<th>Judul</th>
+					<th>Pengarang</th>
+					<th>Penerbit</th>
+					<th>Tahun Terbit</th>
+					<th>Sumber Asal</th>
+					<th>Jumlah</th>
+					<th>Action</th>
 				</tr>
 				</thead>
 				<tbody class="table-border-bottom-0">
