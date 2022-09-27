@@ -10,64 +10,72 @@
 		<div class="layout-page">
 			<div class="content-wrapper">
 				<div class="container-xxl flex-grow-1 container-p-y">
-					<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Form /</span> Tambah Fiksi</h4>
+					<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Form /</span> Tambah Buku Fiksi</h4>
 					<div class="row">
 						<div class="col-xl">
 							<div class="card mb-4">
 								<div class="card-body">
-									<form id="form-tambah-fiksi" method="post" action="<?= site_url('FiksiController/insert') ?>" enctype="multipart/form-data">
+									<form id="form-tambah-buku" method="post" action="<?= site_url('BukuController/insertFiksi') ?>" enctype="multipart/form-data">
+										<input require type="hidden" value="fiksi" class="form-control" name="jenis_buku"/>
 										<div class="mb-3">
-											<label class="form-label">Kode Fiksi</label>
-											<input require type="text" class="form-control" name="kode_fiksi" placeholder="Masukkan Kode Fiksi" />
+											<label class="form-label">Kode Buku</label>
+											<input require type="text" class="form-control" name="kode_buku" placeholder="Masukkan Kode Buku" />
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Judul Fiksi</label>
-											<input require type="text" class="form-control" name="judul_fiksi" placeholder="Masukkan Judul Fiksi" />
+											<label class="form-label">Judul Buku</label>
+											<input require type="text" class="form-control" name="judul_buku" placeholder="Masukkan Judul Buku" />
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Pengarang Fiksi</label>
-											<input require type="text" class="form-control" name="pengarang_fiksi" placeholder="Masukkan Pengarang Fiksi" />
+											<label class="form-label">Pengarang Buku</label>
+											<input require type="text" class="form-control" name="pengarang_buku" placeholder="Masukkan Pengarang Buku" />
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Klasifikasi Fiksi</label>
-											<input require type="text" class="form-control" name="klasifikasi_fiksi" placeholder="Masukkan Klasifikasi Fiksi" />
+											<label class="form-label">Penerbit Buku</label>
+											<input require type="text" class="form-control" name="penerbit_buku" placeholder="Masukkan Penerbit Buku" />
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Sumber Asal Fiksi</label>
-											<select class="form-control" name="sumber_asal_Fiksi" >
-												<option value="Beli">Beli</option>
-												<option value="Hadiah">Hadiah</option>
+											<?php
+											echo '<label class="form-label">Tahun Terbit</label><br><select class="form-control" name="thn_terbit_buku">';
+											echo '<option selected>Pilih Tahun Terbit</option>';
+											for($year=date('Y'); $year>=2000; $year--){
+												echo '<option value="'.$year.'">'.$year.'</option>';
+											}
+											echo '</select>';
+											?>
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Bahasa Buku</label>
+											<select class="form-control" name="bahasa_buku" >
+												<option selected>Pilih Bahasa Buku</option>
+												<option value="asing" >Asing</option>
+												<option value="indonesia">Indonesia</option>
 											</select>
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Bahasa Fiksi</label>
-											<select class="form-control" name="bahasa_fiksi" >
-												<option value="Indonesia">Indonesia</option>
-												<option value="Asing">Asing</option>
+											<label class="form-label">Klasifikasi Buku</label>
+											<input require type="text" class="form-control" name="klasifikasi_buku" placeholder="Masukkan Klasifikasi Buku" />
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Sumber Asal Buku</label>
+											<select class="form-control" name="sumber_asal_buku" >
+												<option selected>Pilih Asal Buku</option>
+												<option value="beli" > Beli</option>
+												<option value="bantuan">Bantuan</option>
 											</select>
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Macam Fiksi</label>
-											<select class="form-control" name="macam_fiksi" >
-												<option value="Teks">Teks</option>
-												<option value="Fakta">Fakta</option>
-												<option value="Fiksi">Fiksi</option>
-												<option value="Info">Info</option>
-											</select>
+											<label class="form-label">Harga Buku</label>
+											<input require type="number" class="form-control" name="harga_buku" placeholder="Masukkan Harga Buku" />
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Keterangan Fiksi</label>
-											<input require type="date" class="form-control" name="keterangan_fiksi" placeholder="Masukkan Keterangan Fiksi" />
-										</div>
-                                        <div class="mb-3">
-											<label class="form-label">Jumlah Fiksi</label>
-											<input require type="text" class="form-control" name="jumlah_fiksi" placeholder="Masukkan Jumlah Fiksi" />
+											<label class="form-label">Jumlah Buku</label>
+											<input require type="number" class="form-control" name="jumlah_buku" placeholder="Masukkan Jumlah Buku" />
 										</div>
 									</form>
-									<button type="button" id="btn-save-fiksi" class="btn btn-success btn-sm">
+									<button type="button" id="btn-save-buku" class="btn btn-success btn-sm">
 										<i class="bx bx-save"></i> Simpan
 									</button>
-									<a href="<?= site_url('FiksiController') ?>" class="btn btn-primary btn-sm">
+									<a href="<?= site_url('BukuController/fiksi') ?>" class="btn btn-primary btn-sm">
 										<i class="bx bx-undo"></i> Kembali
 									</a>
 								</div>
@@ -81,18 +89,18 @@
 </div>
 <script>
 	$(function (){
-		$("#btn-save-fiksi").on("click", function() {
-			let validate = $("#form-tambah-fiksi").valid()
+		$("#btn-save-buku").on("click", function() {
+			let validate = $("#form-tambah-buku").valid()
 			if (validate) {
-				$("#form-tambah-fiksi").submit()
+				$("#form-tambah-buku").submit()
 			}
 		})
-		$("#form-tambah-fiksi").validates({
+		$("#form-tambah-buku").validates({
 			rules: {
-				kode_fiksi: {
+				kode_buku: {
 					digits: true
 				},
-				jumlah_fiksi: {
+				jumlah_buku: {
 					digits: true
 				},
 			},

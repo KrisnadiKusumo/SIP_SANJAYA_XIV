@@ -14,9 +14,9 @@
 					<div class="container-xxl flex-grow-1 container-p-y">
 					<div class="card">
 		<div class="card-header">
-			<h2>Data Buku</h2>
-			<a href="<?= site_url('BukuController/tambah') ?>" class="btn btn-primary btn-sm">
-				<i class='bx bxs-user-plus'></i>  Tambah Buku
+			<h2>Data Buku Paket</h2>
+			<a href="<?= site_url('BukuController/tambahBuku') ?>" class="btn btn-primary btn-sm">
+				<i class='bx bxs-book-add'></i>  Tambah Buku
 			</a>
 		</div>
 		<div class="table-responsive text-nowrap">
@@ -24,12 +24,16 @@
 				<thead>
 				<tr>
 					<th>No</th>
+					<th>Kategori</th>
 					<th>Kode</th>
 					<th>Judul</th>
 					<th>Pengarang</th>
 					<th>Penerbit</th>
 					<th>Tahun Terbit</th>
+					<th>Bahasa</th>
+					<th>Klasifikasi</th>
 					<th>Sumber Asal</th>
+					<th>Harga</th>
 					<th>Jumlah</th>
 					<th>Action</th>
 				</tr>
@@ -41,15 +45,19 @@
 					?>
 					<tr>
 						<td><?= $no++ ?></td>
+						<td><?= $b->jenis_buku  ?></td>
 						<td><?= $b->kode_buku  ?></td>
 						<td><?= $b->judul_buku ?></td>
-						<td><?= $b->pengarang_buku ?></td>
-						<td><?= $b->penerbit_buku ?></td>
-						<td><?= $b->thn_terbit_buku ?></td>
-						<td><?= $b->sumber_asal_buku ?></td>
+						<td><?= $b->pengarang_buku  ?></td>
+						<td><?= $b->penerbit_buku  ?></td>
+						<td><?= $b->thn_terbit_buku  ?></td>
+						<td><?= $b->bahasa_buku  ?></td>
+						<td><?= $b->klasifikasi_buku  ?></td>
+						<td><?= $b->sumber_asal_buku  ?></td>
+						<td><?= $b->harga_buku  ?></td>
 						<td><?= $b->jumlah_buku ?></td>
 						<td>
-							<a href="<?= site_url("BukuController/ubah/$b->kode_buku") ?>" class="btn btn-warning btn-sm">
+							<a href="<?= site_url("BukuController/ubahBuku/$b->kode_buku") ?>" class="btn btn-warning btn-sm">
 								<i class="bx bx-edit"></i>
 							</a>
 							<a href="#" data-id="<?= $b->kode_buku ?>" class="btn btn-danger btn-sm btn-delete-buku">
@@ -79,7 +87,7 @@
 							</div>
 						</div>
 					</div>
-					<form id="form-delete" method="post" action="<?= site_url('BukuController/delete') ?>">
+					<form id="form-delete" method="post" action="<?= site_url('BukuController/deleteBuku') ?>">
 					</form>
 				</div>
 			</div>

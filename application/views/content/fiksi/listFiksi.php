@@ -14,9 +14,9 @@
 				<div class="container-xxl flex-grow-1 container-p-y">
 					<div class="card">
 						<div class="card-header">
-							<h2>Data Fiksi</h2>
-							<a href="<?= site_url('FiksiController/tambah') ?>" class="btn btn-primary btn-sm">
-								<i class='bx bxs-user-plus'></i>  Tambah Fiksi
+							<h2>Data Buku Fiksi</h2>
+							<a href="<?= site_url('BukuController/tambahFiksi') ?>" class="btn btn-primary btn-sm">
+								<i class='bx bxs-book-add'></i>  Tambah Buku
 							</a>
 						</div>
 						<div class="table-responsive text-nowrap">
@@ -27,12 +27,12 @@
 									<th>Kode</th>
 									<th>Judul</th>
 									<th>Pengarang</th>
+									<th>Penerbit</th>
+									<th>Tahun Terbit</th>
+									<th>Bahasa</th>
 									<th>Klasifikasi</th>
 									<th>Sumber Asal</th>
-									<th>Bahasa</th>
-									<th>Macam</th>
 									<th>Harga</th>
-									<th>Keterangan</th>
 									<th>Jumlah</th>
 									<th>Action</th>
 								</tr>
@@ -44,21 +44,21 @@
 									?>
 									<tr>
 										<td><?= $no++ ?></td>
-										<td><?= $f->kode_fiksi  ?></td>
-										<td><?= $f->judul_fiksi ?></td>
-										<td><?= $f->pengarang_fiksi ?></td>
-										<td><?= $f->klasifikasi_fiksi ?></td>
-										<td><?= $f->sumber_asal_fiksi ?></td>
-										<td><?= $f->bahasa_fiksi ?></td>
-										<td><?= $f->macam_fiksi ?></td>
-										<td><?= $f->harga_fiksi ?></td>
-										<td><?= $f->keterangan_fiksi ?></td>
-										<td><?= $f->jumlah_fiksi ?></td>
+										<td><?= $f->kode_buku  ?></td>
+										<td><?= $f->judul_buku ?></td>
+										<td><?= $f->pengarang_buku  ?></td>
+										<td><?= $f->penerbit_buku  ?></td>
+										<td><?= $f->thn_terbit_buku  ?></td>
+										<td><?= $f->bahasa_buku  ?></td>
+										<td><?= $f->klasifikasi_buku  ?></td>
+										<td><?= $f->sumber_asal_buku  ?></td>
+										<td><?= $f->harga_buku  ?></td>
+										<td><?= $f->jumlah_buku ?></td>
 										<td>
-											<a href="<?= site_url("FiksiController/ubah/$f->kode_fiksi") ?>" class="btn btn-warning btn-sm">
+											<a href="<?= site_url("BukuController/ubahFiksi/$f->kode_buku") ?>" class="btn btn-warning btn-sm">
 												<i class="bx bx-edit"></i>
 											</a>
-											<a href="#" data-id="<?= $f->kode_fiksi ?>" class="btn btn-danger btn-sm btn-delete-fiksi">
+											<a href="#" data-id="<?= $f->kode_buku ?>" class="btn btn-danger btn-sm btn-delete-buku">
 												<i class="bx bx-trash"></i>
 											</a>
 										</td>
@@ -85,7 +85,7 @@
 							</div>
 						</div>
 					</div>
-					<form id="form-delete" method="post" action="<?= site_url('FiksiController/delete') ?>">
+					<form id="form-delete" method="post" action="<?= site_url('BukuController/deleteFiksi') ?>">
 					</form>
 				</div>
 			</div>
@@ -95,18 +95,18 @@
 </html>
 <script>
 	$(function() {
-		let idFiksi = 0
-		$(".btn-delete-fiksi").on("click", function() {
-			idFiksi = $(this).data("id");
-			console.log(idFiksi);
+		let idBuku = 0
+		$(".btn-delete-buku").on("click", function() {
+			idBuku = $(this).data("id");
+			console.log(idBuku);
 			$("#modal-confirm-delete").modal('show');
 		});
 		$("#btn-delete").on("click", function() {
 			//panggil url untuk hapus data
 			let inputId = $("<input>")
 				.attr("type", "hidden")
-				.attr("name", "kode_fiksi")
-				.val(idFiksi);
+				.attr("name", "kode_buku")
+				.val(idBuku);
 			let formDelete = $("#form-delete");
 			formDelete.empty().append(inputId);
 			formDelete.submit();

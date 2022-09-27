@@ -26,12 +26,23 @@ class AnggotaController extends CI_Controller
 
 	public function insert()
 	{
+		$config['upload_path']          = './foto/';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 10000;
+		$config['max_width']            = 10000;
+		$config['max_height']           = 10000;
+
+		$this->load->library('upload', $config);
+
+		$gambar = $this->upload->data();
+		$foto = $gambar['file_name'];
+
 		$data = array(
 			"id_anggota" => $this->input->post("id_anggota"),
 			"nama_anggota" => $this->input->post("nama_anggota"),
 			"alamat_anggota" => $this->input->post("alamat_anggota"),
 			"no_telp_anggota" => $this->input->post("no_telp_anggota"),
-
+			"foto_anggota" => $foto,
 		);
 
 		$id = $this->ModelAnggota->insertGetId($data);

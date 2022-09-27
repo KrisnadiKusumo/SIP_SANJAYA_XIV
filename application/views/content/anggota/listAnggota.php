@@ -12,7 +12,6 @@
 			<!-- Content wrapper -->
 			<div class="content-wrapper">
 					<div class="container-xxl flex-grow-1 container-p-y">
-
 					<div class="card">
 		<div class="card-header">
 			<h2>Data Anggota</h2>
@@ -29,6 +28,7 @@
 					<th>Nama</th>
 					<th>Alamat</th>
 					<th>No Telepon</th>
+					<th>Foto</th>
 					<th>Action</th>
 				</tr>
 				</thead>
@@ -43,6 +43,7 @@
 						<td><?= $a->nama_anggota ?></td>
 						<td><?= $a->alamat_anggota ?></td>
 						<td><?= $a->no_telp_anggota ?></td>
+						<td><img src="<?php echo base_url() . '/foto/' . $a->foto_anggota ?>" width="100"></td>
 						<td>
 							<a href="<?= site_url("AnggotaController/ubah/$a->id_anggota") ?>" class="btn btn-warning btn-sm">
 								<i class="bx bx-edit"></i>

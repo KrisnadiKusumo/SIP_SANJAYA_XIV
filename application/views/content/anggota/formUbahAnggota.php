@@ -35,6 +35,10 @@
 											<label class="form-label">No Telepon Anggota</label>
 											<input require type="text" value="<?= $anggota->no_telp_anggota?>" class="form-control" name="no_telp_anggota" placeholder="Masukkan No Telepon Anggota" />
 										</div>
+										<div class="mb-3">
+											<label class="form-label">Gambar</label>
+											<input type="file" class="form-control" name="gambar_anggota" placeholder="Masukkan file anggota" size="20" />
+										</div>
 									</form>
 								</div>
 								<div class="card-footer">

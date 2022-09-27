@@ -6,9 +6,14 @@ class ModelBuku extends CI_Model
 	var $table = "buku";
 	var $primaryKey = "kode_buku";
 
-	public function getAll()
+	public function getAllBuku()
 	{
-		return $this->db->get($this->table)->result();
+		return $this->db->get_where('buku', array('jenis_buku !=' => 'fiksi'))->result();
+	}
+
+	public function getAllFiksi()
+	{
+		return $this->db->get_where('buku', array('jenis_buku' => 'fiksi'))->result();
 	}
 
 	// function untuk get data by primary_key

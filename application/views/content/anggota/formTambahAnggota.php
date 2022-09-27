@@ -32,6 +32,10 @@
 											<label class="form-label">No Telepon Anggota</label>
 											<input require type="text" class="form-control" name="no_telp_anggota" placeholder="Masukkan No Telepon Anggota" />
 										</div>
+										<div class="mb-3">
+											<label class="form-label">Foto Anggota</label>
+											<input type="file" class="form-control" name="foto_anggota" placeholder="Masukkan File Anggota" size="20" />
+										</div>
 									</form>
 									<button type="button" id="btn-save-anggota" class="btn btn-success btn-sm">
 										<i class="bx bx-save"></i> Simpan

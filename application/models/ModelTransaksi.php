@@ -1,14 +1,19 @@
 <?php
 
 
-class ModelFiksi extends CI_Model
+class ModelTransaksi extends CI_Model
 {
-	var $table = "fiksi";
-	var $primaryKey = "kode_fiksi";
+	var $table = "transaksi";
+	var $primaryKey = "kode_transaksi";
 
 	public function getAll()
 	{
-		return $this->db->get($this->table)->result();
+		$this->db->select('*');
+		$this->db->from('transaksi t');
+		$this->db->join('anggota a','a.id_anggota = t.id_anggota','left');
+		$this->db->join('buku b','b.kode_buku = t.kode_buku','left');
+		$query = $this->db->get();
+		return $query->result();
 	}
 
 	// function untuk get data by primary_key
