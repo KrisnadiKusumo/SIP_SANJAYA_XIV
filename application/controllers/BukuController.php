@@ -5,6 +5,9 @@ class BukuController extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		if(!$this->session->userdata('username')){
+			redirect('Login');
+		}
 		$this->load->model("ModelBuku");
 	}
 
@@ -12,7 +15,12 @@ class BukuController extends CI_Controller {
 	{
 		$dataBuku = $this->ModelBuku->getAllBuku();
 		$data = array(
-			"bukus" => $dataBuku
+			"bukus" => $dataBuku,
+			"isActive1" => '',
+			"isActive2" => '',
+			"isActive3" => '',
+			"isActive4" => 'active',
+			"isActive5" => ''
 		);
 		$this->load->view('content/buku/listBuku', $data);
 	}
@@ -21,7 +29,12 @@ class BukuController extends CI_Controller {
 	{
 		$dataFiksi = $this->ModelBuku->getAllFiksi();
 		$data = array(
-			"fiksis" => $dataFiksi
+			"fiksis" => $dataFiksi,
+			"isActive1" => '',
+			"isActive2" => '',
+			"isActive3" => 'active',
+			"isActive4" => '',
+			"isActive5" => ''
 		);
 		$this->load->view('content/fiksi/listFiksi', $data);
 	}
@@ -29,11 +42,25 @@ class BukuController extends CI_Controller {
 	// untuk me-load tampilan form tambah barang
 
 	public function tambahBuku(){
-		$this->load->view("content/buku/formTambahBuku");
+		$data = array(
+			"isActive1" => '',
+			"isActive2" => '',
+			"isActive3" => '',
+			"isActive4" => 'active',
+			"isActive5" => ''
+		);
+		$this->load->view("content/buku/formTambahBuku",$data);
 	}
 
 	public function tambahFiksi(){
-		$this->load->view("content/fiksi/formTambahFiksi");
+		$data = array(
+			"isActive1" => '',
+			"isActive2" => '',
+			"isActive3" => 'active',
+			"isActive4" => '',
+			"isActive5" => ''
+		);
+		$this->load->view("content/fiksi/formTambahFiksi", $data);
 	}
 
 	public function insertBuku()
@@ -81,6 +108,11 @@ class BukuController extends CI_Controller {
 		$buku = $this->ModelBuku->getByPrimaryKey($id);
 		$data = array(
 			"buku" => $buku,
+			"isActive1" => '',
+			"isActive2" => '',
+			"isActive3" => '',
+			"isActive4" => 'active',
+			"isActive5" => ''
 		);
 		$this->load->view('content/buku/formUbahBuku',$data);
 	}
@@ -90,6 +122,11 @@ class BukuController extends CI_Controller {
 		$buku = $this->ModelBuku->getByPrimaryKey($id);
 		$data = array(
 			"buku" => $buku,
+			"isActive1" => '',
+			"isActive2" => '',
+			"isActive3" => 'active',
+			"isActive4" => '',
+			"isActive5" => ''
 		);
 		$this->load->view('content/fiksi/formUbahFiksi',$data);
 	}

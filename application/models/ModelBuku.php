@@ -16,6 +16,20 @@ class ModelBuku extends CI_Model
 		return $this->db->get_where('buku', array('jenis_buku' => 'fiksi'))->result();
 	}
 
+	public function jumlahBuku(){
+		return $this->db
+			->where(['jenis_buku !='=>'fiksi'])
+			->from("buku")
+			->count_all_results();
+	}
+
+	public function jumlahFiksi(){
+		return $this->db
+			->where(['jenis_buku'=>'fiksi'])
+			->from("buku")
+			->count_all_results();
+	}
+
 	// function untuk get data by primary_key
 	public function getByPrimaryKey($id)
 	{

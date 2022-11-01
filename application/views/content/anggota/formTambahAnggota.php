@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html
+	lang="en"
+	class="light-style layout-menu-fixed"
+	dir="ltr"
+	data-theme="theme-default"
+	data-assets-path="../assets/"
+	data-template="vertical-menu-template-free"
+>
 <head>
 	<?php $this->load->view('layout/header'); ?>
 </head>
 <body>
 <div class="layout-wrapper layout-content-navbar">
 	<div class="layout-container">
-		<?php $this->load->view('layout/navbar'); ?>
+		<?php $this->load->view('layout/menu'); ?>
 		<div class="layout-page">
 			<div class="content-wrapper">
 				<div class="container-xxl flex-grow-1 container-p-y">
@@ -34,7 +41,7 @@
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Foto Anggota</label>
-											<input type="file" class="form-control" name="foto_anggota" placeholder="Masukkan File Anggota" size="20" />
+											<input type="file" class="form-control" name="foto_anggota" placeholder="Masukkan File Anggota"  />
 										</div>
 									</form>
 									<button type="button" id="btn-save-anggota" class="btn btn-success btn-sm">
@@ -49,6 +56,7 @@
 					</div>
 				</div>
 			</div>
+			<?php $this->load->view('layout/footer'); ?>
 		</div>
 	</div>
 </div>

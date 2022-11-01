@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+	  class="light-style layout-menu-fixed"
+	  dir="ltr"
+	  data-theme="theme-default"
+	  data-assets-path="../assets/"
+	  data-template="vertical-menu-template-free">
 <head>
 	<?php $this->load->view('layout/header'); ?>
 </head>
@@ -7,8 +12,9 @@
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
 	<div class="layout-container">
-		<?php $this->load->view('layout/navbar'); ?>
+		<?php $this->load->view('layout/menu'); ?>
 		<div class="layout-page">
+			<?php $this->load->view('layout/navbar'); ?>
 			<!-- Content wrapper -->
 			<div class="content-wrapper">
 				<div class="container-xxl flex-grow-1 container-p-y">
@@ -26,13 +32,6 @@
 									<th>No</th>
 									<th>Kode</th>
 									<th>Judul</th>
-									<th>Pengarang</th>
-									<th>Penerbit</th>
-									<th>Tahun Terbit</th>
-									<th>Bahasa</th>
-									<th>Klasifikasi</th>
-									<th>Sumber Asal</th>
-									<th>Harga</th>
 									<th>Jumlah</th>
 									<th>Action</th>
 								</tr>
@@ -46,13 +45,6 @@
 										<td><?= $no++ ?></td>
 										<td><?= $f->kode_buku  ?></td>
 										<td><?= $f->judul_buku ?></td>
-										<td><?= $f->pengarang_buku  ?></td>
-										<td><?= $f->penerbit_buku  ?></td>
-										<td><?= $f->thn_terbit_buku  ?></td>
-										<td><?= $f->bahasa_buku  ?></td>
-										<td><?= $f->klasifikasi_buku  ?></td>
-										<td><?= $f->sumber_asal_buku  ?></td>
-										<td><?= $f->harga_buku  ?></td>
 										<td><?= $f->jumlah_buku ?></td>
 										<td>
 											<a href="<?= site_url("BukuController/ubahFiksi/$f->kode_buku") ?>" class="btn btn-warning btn-sm">
@@ -89,6 +81,7 @@
 					</form>
 				</div>
 			</div>
+			<?php $this->load->view('layout/footer'); ?>
 		</div>
 	</div>
 </body>

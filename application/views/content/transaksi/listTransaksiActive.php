@@ -32,8 +32,13 @@
 								<thead>
 								<tr>
 									<th>No</th>
-									<th>Kode Transaksi</th>
+									<th>Kode</th>
 									<th>Peminjam</th>
+									<th>Buku</th>
+									<th>Tanggal Pinjam</th>
+									<th>Deadline Kembali</th>
+									<th>Tanggal Kembali</th>
+									<th>Denda</th>
 									<th>Status</th>
 									<th>Action</th>
 								</tr>
@@ -41,40 +46,68 @@
 								<tbody class="table-border-bottom-0">
 								<?php
 								$no = 1;
-								if($transaksis) {
-									foreach ($transaksis as $t) {
-										$this->db->where('kode_transaksi',$t->kode_transaksi);
-										$this->db->where('status','1');
-										$borrowed  = $this->db->get('detail')->result_array();
-										$this->db->where('kode_transaksi',$t->kode_transaksi);
-										$this->db->where('status !=','1');
-										$returned  = $this->db->get('detail')->result_array();
-										?>
-										<tr>
-											<td><?= $no++ ?></td>
-											<td><?= $t->kode_transaksi ?></td>
-											<td><?= $t->nama_anggota ?></td>
-											<td>
-												<span class="badge bg-label-warning me-1"><?= count($borrowed) ?> BORROWED</span>
-												<span class="badge bg-label-success me-1"><?= count($returned) ?> RETURNED</span>
-											</td>
-											<td>
-												<a href="<?= site_url("TransaksiController/detail/$t->kode_transaksi") ?>"
-												   class="btn btn-success btn-sm">
-													<i class='bx bxs-file-find'></i> Lihat Detail
-												</a>
-											</td>
-										</tr>
-										<?php
-									}
+								foreach ($transaksis as $t) {
+
+
+									?>
+									<tr>
+										<td><?= $no++ ?></td>
+										<td><?= $t->kode_transaksi  ?></td>
+										<td><?= $t->nama_anggota ?></td>
+										<td><?= $t->judul_buku ?></td>
+										<td><?= $t->tgl_pinjam ?></td>
+										<td><?= $t->tgl_deadline ?></td>
+										<td><?= $t->tgl_kembali ?></td>
+										<td>
+											<?php
+											if ($t->status === 'sudah'){
+												$d = date_create($t->tgl_deadline);
+												$k = date_create($t->tgl_kembali);
+												$late = date_diff($d, $k);
+												$day = $late->format("%a");
+												if ($t->tgl_kembali > $t->tgl_deadline){
+													$denda = $day * 200;
+												}else{
+													$denda = 0;
+												}
+											}else{
+												$denda = 0;
+											}
+											?>
+											<?= $denda ?>
+										</td>
+										<td>
+											<?php
+											if ($t->status === 'belum'){
+												echo '<span class="badge bg-label-warning me-1">BORROWED</span>';
+											}else{
+												echo '<span class="badge bg-label-success me-1">RETURNED</span>';
+											}
+											?>
+
+										</td>
+										<td>
+											<?php
+											if ($t->status === 'belum'){
+												echo '<a href="#" data-id="'.$t->kode_transaksi.'" class="btn btn-warning btn-sm btn-delete-buku">
+												<i class="bx bx-recycle"></i> Return
+											</a>';
+											}else{
+												echo '<a href="#" data-id="'.$t->kode_transaksi.'" class="btn btn-success btn-sm disabled btn-delete-buku">
+												<i class="bx bx-recycle"></i> Return
+											</a>';
+											}
+											?>
+
+										</td>
+									</tr>
+									<?php
 								}
 								?>
 								</tbody>
 							</table>
 						</div>
 					</div>
-
-					<?php if($transaksis):?>
 					<div class="modal" id="modal-confirm-delete">
 						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
@@ -93,7 +126,6 @@
 					<form id="form-delete" method="post" action="<?= site_url('TransaksiController/kembali') ?>">
 						<input require type="hidden" value="<?= $t->kode_transaksi  ?>" class="form-control" name="kode_transaksi" />
 					</form>
-					<?php endif;?>
 				</div>
 				<?php $this->load->view('layout/footer'); ?>
 			</div>

@@ -23,6 +23,10 @@ class ModelAnggota extends CI_Model
 		return $this->db->insert($this->table, $data);
 	}
 
+	public function jumlahAnggota(){
+		return $this->db->count_all_results($this->table);
+	}
+
 	public function insertGetId($data)
 	{
 		$this->db->insert($this->table, $data);

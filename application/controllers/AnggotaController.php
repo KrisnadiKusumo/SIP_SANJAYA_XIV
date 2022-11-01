@@ -6,6 +6,9 @@ class AnggotaController extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		if(!$this->session->userdata('username')){
+			redirect('Login');
+		}
 		$this->load->model("ModelAnggota");
 	}
 
@@ -13,7 +16,12 @@ class AnggotaController extends CI_Controller
 	{
 		$dataAnggota = $this->ModelAnggota->getAll();
 		$data = array(
-			"anggotas" => $dataAnggota
+			"anggotas" => $dataAnggota,
+			"isActive1" => '',
+			"isActive2" => 'active',
+			"isActive3" => '',
+			"isActive4" => '',
+			"isActive5" => ''
 		);
 		$this->load->view('content/anggota/listAnggota', $data);
 	}
@@ -21,21 +29,32 @@ class AnggotaController extends CI_Controller
 	// untuk me-load tampilan form tambah barang
 
 	public function tambah(){
-		$this->load->view("content/anggota/formTambahAnggota");
+		$data = array(
+			"isActive1" => '',
+			"isActive2" => 'active',
+			"isActive3" => '',
+			"isActive4" => '',
+			"isActive5" => ''
+		);
+		$this->load->view("content/anggota/formTambahAnggota",$data);
 	}
 
 	public function insert()
 	{
-		$config['upload_path']          = './foto/';
-		$config['allowed_types']        = 'gif|jpg|png';
-		$config['max_size']             = 10000;
-		$config['max_width']            = 10000;
-		$config['max_height']           = 10000;
+		$foto = '';
+		if($_FILES['foto_anggota']['tmp_name']) {
+			$config['upload_path'] = './foto/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size'] = 10000;
+			$config['max_width'] = 10000;
+			$config['max_height'] = 10000;
 
-		$this->load->library('upload', $config);
+			$this->load->library('upload', $config);
+			$this->upload->do_upload('foto_anggota');
 
-		$gambar = $this->upload->data();
-		$foto = $gambar['file_name'];
+			$gambar = $this->upload->data();
+			$foto = $gambar['file_name'];
+		}
 
 		$data = array(
 			"id_anggota" => $this->input->post("id_anggota"),
@@ -55,8 +74,27 @@ class AnggotaController extends CI_Controller
 		$anggota = $this->ModelAnggota->getByPrimaryKey($id);
 		$data = array(
 			"anggota" => $anggota,
+			"isActive1" => '',
+			"isActive2" => 'active',
+			"isActive3" => '',
+			"isActive4" => '',
+			"isActive5" => ''
 		);
 		$this->load->view('content/anggota/formUbahAnggota',$data);
+	}
+
+	public function Detail($id)
+	{
+		$anggota = $this->ModelAnggota->getByPrimaryKey($id);
+		$data = array(
+			"anggota" => $anggota,
+			"isActive1" => '',
+			"isActive2" => 'active',
+			"isActive3" => '',
+			"isActive4" => '',
+			"isActive5" => ''
+		);
+		$this->load->view('content/anggota/DetailAnggota',$data);
 	}
 
 	public function update()
@@ -67,8 +105,6 @@ class AnggotaController extends CI_Controller
 			"alamat_anggota" => $this->input->post("alamat_anggota"),
 			"no_telp_anggota" => $this->input->post("no_telp_anggota")
 		);
-		echo var_dump($data);
-		echo var_dump($id);
 		$this->ModelAnggota->update($id, $data);
 		redirect('AnggotaController');
 	}

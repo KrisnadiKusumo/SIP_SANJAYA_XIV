@@ -1,5 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+	lang="en"
+	class="light-style layout-menu-fixed"
+	dir="ltr"
+	data-theme="theme-default"
+	data-assets-path="../assets/"
+	data-template="vertical-menu-template-free"
+>
 <head>
 	<?php $this->load->view('layout/header'); ?>
 </head>
@@ -7,59 +14,59 @@
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
 	<div class="layout-container">
-		<?php $this->load->view('layout/navbar'); ?>
+		<?php $this->load->view('layout/menu'); ?>
 		<div class="layout-page">
+			<?php $this->load->view('layout/navbar'); ?>
 			<!-- Content wrapper -->
 			<div class="content-wrapper">
 					<div class="container-xxl flex-grow-1 container-p-y">
-					<div class="card">
-		<div class="card-header">
-			<h2>Data Anggota</h2>
-			<a href="<?= site_url('AnggotaController/tambah') ?>" class="btn btn-primary btn-sm">
-				<i class='bx bxs-user-plus'></i>  Tambah Anggota
-			</a>
-		</div>
-		<div class="table-responsive text-nowrap">
-			<table class="table table-striped">
-				<thead>
-				<tr>
-					<th>No</th>
-					<th>ID</th>
-					<th>Nama</th>
-					<th>Alamat</th>
-					<th>No Telepon</th>
-					<th>Foto</th>
-					<th>Action</th>
-				</tr>
-				</thead>
-				<tbody class="table-border-bottom-0">
-				<?php
-				$no = 1;
-				foreach ($anggotas as $a) {
-					?>
-					<tr>
-						<td><?= $no++ ?></td>
-						<td><?= $a->id_anggota  ?></td>
-						<td><?= $a->nama_anggota ?></td>
-						<td><?= $a->alamat_anggota ?></td>
-						<td><?= $a->no_telp_anggota ?></td>
-						<td><img src="<?php echo base_url() . '/foto/' . $a->foto_anggota ?>" width="100"></td>
-						<td>
-							<a href="<?= site_url("AnggotaController/ubah/$a->id_anggota") ?>" class="btn btn-warning btn-sm">
-								<i class="bx bx-edit"></i>
-							</a>
-							<a href="#" data-id="<?= $a->id_anggota ?>" class="btn btn-danger btn-sm btn-delete-anggota">
-								<i class="bx bx-trash"></i>
-							</a>
-						</td>
-					</tr>
-					<?php
-				}
-				?>
-				</tbody>
-			</table>
-		</div>
-	</div>
+						<div class="card">
+							<div class="card-header">
+								<h2>Data Anggota</h2>
+								<a href="<?= site_url('AnggotaController/tambah') ?>" class="btn btn-primary btn-sm">
+									<i class='bx bxs-user-plus'></i>  Tambah Anggota
+								</a>
+							</div>
+							<div class="table-responsive text-nowrap">
+								<table class="table table-striped">
+									<thead>
+									<tr>
+										<th>No</th>
+										<th>ID</th>
+										<th>Nama</th>
+										<th>No Telepon</th>
+										<th>Action</th>
+									</tr>
+									</thead>
+									<tbody class="table-border-bottom-0">
+									<?php
+									$no = 1;
+									foreach ($anggotas as $a) {
+										?>
+										<tr>
+											<td><?= $no++ ?></td>
+											<td><?= $a->id_anggota  ?></td>
+											<td><?= $a->nama_anggota ?></td>
+											<td><?= $a->no_telp_anggota ?></td>
+											<td>
+												<a href="<?= site_url("AnggotaController/Detail/$a->id_anggota") ?>" class="btn btn-info btn-sm">
+													<i class='bx bxs-user-detail'></i>
+												</a>
+												<a href="<?= site_url("AnggotaController/ubah/$a->id_anggota") ?>" class="btn btn-warning btn-sm">
+													<i class="bx bx-edit"></i>
+												</a>
+												<a href="#" data-id="<?= $a->id_anggota ?>" class="btn btn-danger btn-sm btn-delete-anggota">
+													<i class="bx bx-trash"></i>
+												</a>
+											</td>
+										</tr>
+										<?php
+									}
+									?>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					<div class="modal" id="modal-confirm-delete">
 						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
@@ -79,6 +86,7 @@
 					</form>
 				</div>
 			</div>
+			<?php $this->load->view('layout/footer'); ?>
 		</div>
 	</div>
 </body>
