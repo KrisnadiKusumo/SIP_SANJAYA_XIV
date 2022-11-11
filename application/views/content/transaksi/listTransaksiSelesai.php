@@ -23,7 +23,7 @@
 					<div class="card">
 						<div class="card-header">
 							<div class="mb-3 d-flex justify-content-between">
-							<h1>Data Transaksi</h1>
+								<h1>Data Transaksi</h1>
 							</div>
 							<div class="mb-3 d-flex justify-content-between">
 								<div class="button-wrapper">
@@ -35,25 +35,16 @@
 											</span>
 									</a>
 								</div>
-								<form class="d-flex" onsubmit="return false">
-									<input class="form-control me-2" onkeyup="success()" type="search" id="searchinput" placeholder="Cari... (Kode / Peminjam)" aria-label="Search" />
-									<button onclick="cariTransaksi()" class="btn me-2 btn-outline-primary btn-sm" type="submit" id="button" disabled>
-										<i class='bx bx-search-alt'></i>
-									</button>
-									<button onclick="refreshPage()" class="btn btn-outline-secondary btn-sm" type="submit">
-										<i class='bx bx-reset'></i>
-									</button>
-								</form>
 							</div>
 							<div class="mb-3 d-flex justify-content-center demo-inline-spacing">
-								<a href="<?= site_url('TransaksiController') ?>" class="btn rounded-pill btn-outline-dark active">
+								<a href="<?= site_url('TransaksiController') ?>" class="btn rounded-pill btn-outline-dark">
 									Semua
 								</a>
 
 								<a href="<?= site_url('TransaksiController/active') ?>" class="btn rounded-pill btn-outline-dark">
 									Aktif
 								</a>
-								<a href="<?= site_url('TransaksiController/selesai') ?>" class="btn rounded-pill btn-outline-dark">
+								<a href="<?= site_url('TransaksiController/selesai') ?>" class="btn rounded-pill btn-outline-dark active">
 									Selesai
 								</a>
 							</div>
@@ -82,34 +73,4 @@
 	</div>
 </body>
 </html>
-<script>
-	function refreshPage(){
-		window.location.reload();
-	}
-
-	function success(){
-		if(document.getElementById("searchinput").value==="") {
-			document.getElementById('button').disabled = true;
-		} else {
-			document.getElementById('button').disabled = false;
-		}
-	}
-	
-	function cariTransaksi()
-	{
-		var searchinput = document.getElementById('searchinput');
-		var datatransaksi = document.getElementById('datatransaksi');
-		var ajax = new XMLHttpRequest();
-		ajax.onreadystatechange = function () {
-			if(ajax.readyState == 4 && ajax.status == 200)
-			{
-				datatransaksi.innerHTML = ajax.responseText;
-			}
-		}
-		ajax.open('POST','<?=base_url()?>TransaksiController/ajaxCariTransaksi',true);
-		ajax.setRequestHeader('Content-type','Application/x-www-form-urlencoded');
-		ajax.send('keyword='+searchinput.value);
-	}
-
-</script>
 

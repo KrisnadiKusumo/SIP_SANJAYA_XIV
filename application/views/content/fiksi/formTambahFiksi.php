@@ -79,12 +79,15 @@
 											<input require type="number" class="form-control" name="jumlah_buku" placeholder="Masukkan Jumlah Buku" />
 										</div>
 									</form>
-									<button type="button" id="btn-save-buku" class="btn btn-success btn-sm">
-										<i class="bx bx-save"></i> Simpan
-									</button>
-									<a href="<?= site_url('BukuController/fiksi') ?>" class="btn btn-primary btn-sm">
-										<i class="bx bx-undo"></i> Kembali
-									</a>
+									<div class="mb-3">
+										<button type="button" id="btn-save-buku" class="btn btn-success">
+											<i class="bx bx-save"></i> Simpan
+										</button>
+										<a href="<?= site_url('BukuController/fiksi') ?>" class="btn btn-primary">
+											<i class="bx bxs-share"></i> Kembali
+										</a>
+									</div>
+
 								</div>
 							</div>
 						</div>

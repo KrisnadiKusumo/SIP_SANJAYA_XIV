@@ -7,12 +7,12 @@
 			</script>
 		</div>
 		<div>
-			Made with ❤️ by
+			Developed with ❤️ by KELOMPOK PPL 22
 			<a
 				href="https://ukrim.ac.id/"
 				target="_blank"
 				class="footer-link me-4"
-			><b>PPL UKRIM G2</b> </a
+			><b>UKRIM University</b> </a
 			>
 		</div>
 	</div>

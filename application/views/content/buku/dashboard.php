@@ -28,10 +28,25 @@
 				<!-- Content -->
 				<div class="content-wrapper">
 					<div class="container-xxl flex-grow-1 container-p-y">
-
+						<div
+							class="bs-toast toast toast-placement-ex m-2 fade bg-success top-0 end-0"
+							role="alert"
+							aria-live="assertive"
+							aria-atomic="true"
+							data-delay="2000"
+						>
+							<div class="toast-header">
+								<i class="bx bx-bell me-2"></i>
+								<div class="me-auto fw-semibold">Login Berhasil</div>
+								<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+							</div>
+							<div class="toast-body">
+							</div>
+						</div>
+						<div class="row">
 						<div class="col-lg-12 mb-4 order-0">
 							<div class="card">
-								<div class="col-sm-">
+								<div class="d-flex align-items-end row">
 									<div class="card-body">
 										<div class="card-body text-center">
 											<img
@@ -46,9 +61,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-12 col-md-4 order-1">
+						<div class="col-12 col-md-8 col-lg-12 order-3 order-md-2">
 							<div class="row">
-								<div class="col-lg-6 col-md-12 col-6 mb-4">
+								<div class="col col-xl-4 col-sm-6">
 									<div class="card">
 										<div class="d-flex align-items-end row">
 											<div class="col-8">
@@ -59,12 +74,12 @@
 												</div>
 											</div>
 											<div class="col-4 pt-3 ps-0">
-												<img src="<?php base_url();?>/assets/img/icons/unicons/book-sleep.png" width="140" height="140" class="rounded-start" alt="View Sales">
+												<img src="<?php base_url();?>/assets/img/icons/unicons/book-sleep.png" width="140" height="140" class="rounded-start d-none d-sm-block" alt="View Sales">
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="col-6 mb-4">
+								<div class="col-xl-4 col-sm-6">
 									<div class="card">
 										<div class="d-flex align-items-end row">
 											<div class="col-8">
@@ -75,7 +90,7 @@
 												</div>
 											</div>
 											<div class="col-4 pt-3 ps-0">
-												<img src="<?php base_url();?>/assets/img/icons/unicons/book-stand.png" width="140" height="140" class="rounded-start" alt="View Sales">
+												<img src="<?php base_url();?>/assets/img/icons/unicons/book-stand.png" width="140" height="140" class="rounded-start d-none d-sm-block" alt="View Sales">
 											</div>
 										</div>
 									</div>
@@ -84,7 +99,7 @@
 						</div>
 						<div class="col-12 col-md-8 col-lg-12 order-3 order-md-2">
 							<div class="row">
-								<div class="col-6 mb-4">
+								<div class="col-xl-4 col-sm-6">
 									<div class="card">
 										<div class="d-flex align-items-end row">
 											<div class="col-8">
@@ -95,12 +110,12 @@
 												</div>
 											</div>
 											<div class="col-4 pt-3 ps-0">
-												<img src="<?php base_url();?>/assets/img/icons/unicons/student.png" width="140" height="125" class="rounded-start" alt="View Sales">
+												<img src="<?php base_url();?>/assets/img/icons/unicons/student.png" width="140" height="125" class="rounded-start d-none d-sm-block" alt="View Sales">
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="col-6 mb-4">
+								<div class="col-xl-4 col-sm-6">
 									<div class="card">
 										<div class="d-flex align-items-end row">
 											<div class="col-8">
@@ -111,12 +126,14 @@
 												</div>
 											</div>
 											<div class="col-4 pt-3 ps-0">
-												<img src="<?php base_url();?>/assets/img/icons/unicons/read-book.webp" width="140" height="140" class="rounded-start" alt="View Sales">
+												<img src="<?php base_url();?>/assets/img/icons/unicons/read-book.webp" width="140" height="140" class="rounded-start d-none d-sm-block" alt="View Sales">
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+							</div>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -129,7 +146,29 @@
 		</div>
 		<!-- / Layout page -->
 	</div>
+
+<!--MODAL-->
+<div class="modal fade " id="modallogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Login Berhasil</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
 </div>
 <!-- / Layout wrapper -->
 </body>
 </html>
+
+<script>
+	window.onload = function () {
+		<?php if($this->session->userdata('pesan')) :?>
+		$('.toast').toast('show');
+		<?php $this->session->unset_userdata('pesan');?>
+		<?php endif;?>
+	}
+</script>

@@ -27,22 +27,22 @@
 											<label class="form-label">Kategori Buku</label>
 											<select class="form-control" name="jenis_buku" >
 												<option selected>Pilih Jenis Buku</option>
-												<option value="bindo">Bahasa Indonesia</option>
-												<option value="bing">Bahasa Inggris</option>
-												<option value="jawa">Bahasa Jawa</option>
+												<option value="bindo">Bhs. Indonesia</option>
+												<option value="bing">Bhs. Inggris</option>
+												<option value="jawa">Bhs. Jawa</option>
 												<option value="bio">Biologi</option>
 												<option value="ekak">Ekonomi Akuntansi</option>
 												<option value="fis">Fisika</option>
 												<option value="geo">Geografi</option>
 												<option value="mtk">Matematika</option>
-												<option value="agama">Pendidikan Agama</option>
-												<option value="pjok">Pendidikan Jasmani, Olahraga, dan Kesehatan</option>
-												<option value="ppkn">Pendidikan Kewarganegaraan</option>
-												<option value="pkwu">Prakarya dan Kewirausahaan</option>
+												<option value="agama">Agama</option>
+												<option value="pjok">PJOK</option>
+												<option value="ppkn">PPKN</option>
+												<option value="pkwu">PKWU</option>
 												<option value="sej">Sejarah</option>
 												<option value="senbud">Seni Budaya</option>
 												<option value="sos">Sosiologi</option>
-												<option value="tik">Teknologi Informasi dan Komunikasi</option>
+												<option value="tik">TIK</option>
 											</select>
 										</div>
 										<div class="mb-3">
@@ -100,12 +100,14 @@
 											<input require type="number" class="form-control" name="jumlah_buku" placeholder="Masukkan Jumlah Buku" />
 										</div>
 									</form>
-									<button type="button" id="btn-save-buku" class="btn btn-success btn-sm">
-										<i class="bx bx-save"></i> Simpan
-									</button>
-									<a href="<?= site_url('BukuController/buku') ?>" class="btn btn-primary btn-sm">
-										<i class="bx bx-undo"></i> Kembali
-									</a>
+									<div class="mb-3">
+										<button type="button" id="btn-save-buku" class="btn btn-success">
+											<i class="bx bx-save"></i> Simpan
+										</button>
+										<a href="<?= site_url('BukuController/buku') ?>" class="btn btn-primary">
+											<i class="bx bxs-share"></i> Kembali
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>

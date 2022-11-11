@@ -103,6 +103,34 @@ class BukuController extends CI_Controller {
 		redirect('BukuController/fiksi');
 	}
 
+	public function detailBuku($id)
+	{
+		$buku = $this->ModelBuku->getByPrimaryKey($id);
+		$data = array(
+			"buku" => $buku,
+			"isActive1" => '',
+			"isActive2" => '',
+			"isActive3" => '',
+			"isActive4" => 'active',
+			"isActive5" => ''
+		);
+		$this->load->view('content/buku/detailBuku',$data);
+	}
+
+	public function detailFiksi($id)
+	{
+		$buku = $this->ModelBuku->getByPrimaryKey($id);
+		$data = array(
+			"buku" => $buku,
+			"isActive1" => '',
+			"isActive2" => '',
+			"isActive3" => 'active',
+			"isActive4" => '',
+			"isActive5" => ''
+		);
+		$this->load->view('content/fiksi/detailFiksi',$data);
+	}
+
 	public function ubahBuku($id)
 	{
 		$buku = $this->ModelBuku->getByPrimaryKey($id);
@@ -181,5 +209,25 @@ class BukuController extends CI_Controller {
 		$id = $this->input->post('kode_buku');
 		$this->ModelBuku->delete($id);
 		redirect('BukuController/fiksi');
+	}
+
+	public function ajaxCariBuku()
+	{
+		$keyword = $this->input->post('keyword');
+		$this->db->where('jenis_buku !=','fiksi');
+		$this->db->like('judul_buku',$keyword);
+		$this->db->or_like('kode_buku',$keyword);
+		$data['bukus'] = $this->db->get('buku')->result();
+		$this->load->view('content/buku/ajax/dataBuku',$data);
+	}
+
+	public function ajaxCariFiksi()
+	{
+		$keyword = $this->input->post('keyword');
+		$this->db->where('jenis_buku','fiksi');
+		$this->db->like('judul_buku',$keyword);
+		$this->db->or_like('kode_buku',$keyword);
+		$data['fiksis'] = $this->db->get('buku')->result();
+		$this->load->view('content/fiksi/ajax/dataFiksi',$data);
 	}
 }

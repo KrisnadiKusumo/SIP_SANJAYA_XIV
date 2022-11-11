@@ -49,18 +49,12 @@ class ModelTransaksi extends CI_Model
 		return $query->row();
 	}
 
-	public function getNewNomor()
-	{
-		$this->db->select_ifnull(max('kode_transaksi'==0));
-		$query = $this->db->get();
-		return $query->row()->nomor + 1;
-	}
 
-	public function createNoTransasaksi()
+	public function createNoTransaksi()
 	{
-		$newNomor = self::getNewNomor();
-		$kodeTransaksi = 'TRX-'.date('Y').'-'.date('M').'-'.date('D').'-'
-			.str_pad($newNomor,5,'0',STR_PAD_LEFT);
+		$kodeTransaksi = 'TRX-'.date('Y').'-'.date('m').'-'.date('d').'-'
+			.date('H').'-'.date('i'.'-'.date('s'));
+		return $kodeTransaksi;
 	}
 
 	public function getAllActive()
@@ -68,8 +62,22 @@ class ModelTransaksi extends CI_Model
 		$this->db->select('*');
 		$this->db->from('transaksi t');
 		$this->db->join('anggota a','a.id_anggota = t.id_anggota','left');
-		$this->db->join('buku b','b.kode_buku = t.kode_buku','left');
-		$this->db->where('t.status','belum');
+		$this->db->join('detail d','d.kode_transaksi = t.kode_transaksi','left');
+		$this->db->join('buku b','d.kode_buku = b.kode_buku','left');
+		$this->db->where('d.status','1');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function getAllSelesai()
+	{
+		$this->db->select('*');
+		$this->db->from('transaksi t');
+		$this->db->join('anggota a','a.id_anggota = t.id_anggota','left');
+		$this->db->join('detail d','d.kode_transaksi = t.kode_transaksi','left');
+		$this->db->join('buku b','d.kode_buku = b.kode_buku','left');
+		$this->db->where('d.status','');
+		$this->db->group_by('t.kode_transaksi');
 		$query = $this->db->get();
 		return $query->result();
 	}

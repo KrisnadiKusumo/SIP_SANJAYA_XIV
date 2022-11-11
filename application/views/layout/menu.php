@@ -43,25 +43,6 @@
 				<div data-i18n="Tables">Data Transaksi</div>
 			</a>
 		</li>
-		<li class="menu-item">
-			<a href="<?= site_url('TransaksiController/active') ?>" class="menu-link">
-				<i class="menu-icon tf-icons bx bx-table"></i>
-				<div data-i18n="Tables">Belum Dikembalikan</div>
-			</a>
-		</li>
 	</ul>
 	</li>
-
-	<!-- Misc -->
-	<li class="menu-header small text-uppercase"><span class="menu-header-text">Logout</span></li>
-	<li class="menu-item">
-		<a
-			href="<?= site_url('Login/logout') ?>"
-			class="menu-link"
-		>
-			<i class='menu-icon tf-icons bx bx-log-out'></i>
-			<div data-i18n="Support">Logout</div>
-		</a>
-	</li>
-	</ul>
 </aside>

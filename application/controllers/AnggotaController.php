@@ -48,6 +48,7 @@ class AnggotaController extends CI_Controller
 			$config['max_size'] = 10000;
 			$config['max_width'] = 10000;
 			$config['max_height'] = 10000;
+			$config['encrypt_name'] = true;
 
 			$this->load->library('upload', $config);
 			$this->upload->do_upload('foto_anggota');
@@ -83,7 +84,7 @@ class AnggotaController extends CI_Controller
 		$this->load->view('content/anggota/formUbahAnggota',$data);
 	}
 
-	public function Detail($id)
+	public function detail($id)
 	{
 		$anggota = $this->ModelAnggota->getByPrimaryKey($id);
 		$data = array(
@@ -94,16 +95,34 @@ class AnggotaController extends CI_Controller
 			"isActive4" => '',
 			"isActive5" => ''
 		);
-		$this->load->view('content/anggota/DetailAnggota',$data);
+		$this->load->view('content/anggota/detailAnggota',$data);
 	}
 
 	public function update()
 	{
+		$foto = $this->input->post('foto_anggota_lama');
+		if($_FILES['foto_anggota']['tmp_name']) {
+			unlink('./foto/'.$foto);
+
+			$config['upload_path'] = './foto/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size'] = 10000;
+			$config['max_width'] = 10000;
+			$config['max_height'] = 10000;
+
+			$this->load->library('upload', $config);
+			$this->upload->do_upload('foto_anggota');
+
+			$gambar = $this->upload->data();
+			$foto = $gambar['file_name'];
+		}
+
 		$id = $this->input->post('id_anggota');
 		$data = array(
 			"nama_anggota" => $this->input->post("nama_anggota"),
 			"alamat_anggota" => $this->input->post("alamat_anggota"),
-			"no_telp_anggota" => $this->input->post("no_telp_anggota")
+			"no_telp_anggota" => $this->input->post("no_telp_anggota"),
+			"foto_anggota" => $foto
 		);
 		$this->ModelAnggota->update($id, $data);
 		redirect('AnggotaController');
@@ -114,5 +133,25 @@ class AnggotaController extends CI_Controller
 		$id = $this->input->post('id_anggota');
 		$this->ModelAnggota->delete($id);
 		redirect('AnggotaController');
+	}
+
+	public function ajaxCekNoIdentitas($idanggota)
+	{
+		$this->db->where('id_anggota',$idanggota);
+		$cek = $this->db->get('anggota')->row();
+		if($cek){
+			echo '200';
+		} else {
+			echo '201';
+		}
+	}
+
+	public function ajaxCariAnggota()
+	{
+		$keyword = $this->input->post('keyword');
+		$this->db->like('nama_anggota',$keyword);
+		$this->db->or_like('id_anggota',$keyword);
+		$data['anggotas'] = $this->db->get('anggota')->result();
+		$this->load->view('content/anggota/ajax/dataAnggota',$data);
 	}
 }

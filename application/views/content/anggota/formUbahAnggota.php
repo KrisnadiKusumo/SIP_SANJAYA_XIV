@@ -26,6 +26,23 @@
 								</div>
 								<div class="card-body">
 									<form id="form-update-anggota" method="post" action="<?= site_url('AnggotaController/update') ?>" enctype="multipart/form-data">
+										<div class="mb-3 d-flex align-items-start align-items-sm-center gap-4">
+											<img
+												src="<?php echo base_url() . '/foto/' . $anggota->foto_anggota ?>"
+												alt="user-avatar"
+												class="d-block rounded"
+												height="100"
+												width="100"
+												id="uploadedAvatar"
+											/>
+											<div class="button-wrapper">
+												<label class="form-label">
+													<span class="d-none d-sm-block">Ganti Foto</span>
+												</label>
+												<input type="file" class="form-control" name="foto_anggota"/>
+												<p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+											</div>
+										</div>
 										<div class="mb-3">
 											<label class="form-label">No Identitas</label>
 											<input require type="" readonly value="<?= $anggota->id_anggota?>" class="form-control" name="id_anggota"/>
@@ -42,20 +59,18 @@
 											<label class="form-label">No Telepon Anggota</label>
 											<input require type="text" value="<?= $anggota->no_telp_anggota?>" class="form-control" name="no_telp_anggota" placeholder="Masukkan No Telepon Anggota" />
 										</div>
-										<div class="mb-3">
-											<label class="form-label">Gambar</label>
-											<input type="file" class="form-control" name="gambar_anggota" placeholder="Masukkan file anggota" size="20" />
-										</div>
+											<input type="hidden" name="foto_anggota_lama" value="<?= $anggota->foto_anggota ?>" >
 									</form>
+									<div class="mb-3">
+										<button type="button" id="btn-update-anggota" class="btn btn-success">
+											<i class="bx bx-save"></i> Simpan
+										</button>
+										<a href="<?= site_url('AnggotaController') ?>" class="btn btn-primary">
+											<i class="bx bxs-share"></i> Kembali
+										</a>
+									</div>
 								</div>
-								<div class="card-footer">
-									<button type="button" id="btn-update-anggota" class="btn btn-success btn-sm">
-										<i class="bx bx-save"></i> Simpan
-									</button>
-									<a href="<?= site_url('AnggotaController') ?>" class="btn btn-primary btn-sm">
-										<i class="bx bx-undo"></i> Kembali
-									</a>
-								</div>
+
 							</div>
 						</div>
 					</div>

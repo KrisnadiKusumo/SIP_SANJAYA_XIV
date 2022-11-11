@@ -22,10 +22,27 @@
 					<div class="container-xxl flex-grow-1 container-p-y">
 						<div class="card">
 							<div class="card-header">
-								<h2>Data Buku Paket</h2>
-								<a href="<?= site_url('BukuController/tambahBuku') ?>" class="btn btn-primary btn-sm">
-									<i class='bx bxs-book-add'></i>  Tambah Buku
-								</a>
+								<h1>Data Buku Paket</h1>
+								<div class="d-flex justify-content-between">
+									<div class="button-wrapper">
+										<a href="<?= site_url('BukuController/tambahBuku') ?>" class="btn btn-primary">
+											<i class='bx bxs-book-add d-block d-sm-none'></i>
+											<span class="d-none d-sm-block">
+												<i class='bx bxs-book-add'></i>
+												Tambah Buku
+											</span>
+										</a>
+									</div>
+									<form class="d-flex" onsubmit="return false">
+										<input class="form-control me-2" onkeyup="success()" type="search" id="searchinput" placeholder="Cari... (Kode / Judul)" aria-label="Search" />
+										<button onclick="cariBuku()" class="btn me-2 btn-outline-primary btn-sm" type="submit" id="button" disabled>
+											<i class='bx bx-search-alt'></i>
+										</button>
+										<button onclick="refreshPage()" class="btn btn-outline-secondary btn-sm" type="submit">
+											<i class='bx bx-reset'></i>
+										</button>
+									</form>
+								</div>
 							</div>
 							<div class="table-responsive text-nowrap">
 								<table class="table table-striped">
@@ -39,51 +56,39 @@
 										<th>Action</th>
 									</tr>
 									</thead>
-									<tbody class="table-border-bottom-0">
-									<?php
-									$no = 1;
-									foreach ($bukus as $b) {
-										?>
-										<tr>
-											<td><?= $no++ ?></td>
-											<td><?= $b->jenis_buku  ?></td>
-											<td><?= $b->kode_buku  ?></td>
-											<td><?= $b->judul_buku ?></td>
-											<td><?= $b->jumlah_buku ?></td>
-											<td>
-												<a href="<?= site_url("BukuController/ubahBuku/$b->kode_buku") ?>" class="btn btn-info btn-sm">
-													<i class='bx bxs-user-detail'></i>
-												</a>
-												<a href="<?= site_url("BukuController/ubahBuku/$b->kode_buku") ?>" class="btn btn-warning btn-sm">
-													<i class="bx bx-edit"></i>
-												</a>
-												<a href="#" data-id="<?= $b->kode_buku ?>" class="btn btn-danger btn-sm btn-delete-buku">
-													<i class="bx bx-trash"></i>
-												</a>
-											</td>
-										</tr>
-										<?php
-									}
-									?>
+									<tbody id="databuku" class="table-border-bottom-0">
+									<?php $this->load->view("content/buku/ajax/dataBuku",$bukus) ?>
 									</tbody>
 								</table>
 							</div>
 						</div>
-					<div class="modal" id="modal-confirm-delete">
-						<div class="modal-dialog modal-dialog-centered">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title">Anda Yakin Ingin Hapus Data Ini?</h5>
-								</div>
-								<div class="modal-body">
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-info" data-dismiss="modal">Tidak</button>
-									<button type="button" class="btn btn-danger" id="btn-delete">Hapus</button>
+						<div class="modal fade" id="modal-confirm-delete" tabindex="-1" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="modalCenterTitle">Anda Yakin Ingin Hapus Data Ini?</h5>
+										<button
+											type="button"
+											class="btn-close"
+											data-bs-dismiss="modal"
+											aria-label="Close"
+										></button>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+										</div>
+										<div class="row g-2">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+											Tidak
+										</button>
+										<button type="button" class="btn btn-danger" id="btn-delete">Hapus</button>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 					<form id="form-delete" method="post" action="<?= site_url('BukuController/deleteBuku') ?>">
 					</form>
 				</div>
@@ -114,3 +119,35 @@
 		});
 	})
 </script>
+
+<script>
+	function refreshPage(){
+		window.location.reload();
+	}
+
+	function success(){
+		if(document.getElementById("searchinput").value==="") {
+			document.getElementById('button').disabled = true;
+		} else {
+			document.getElementById('button').disabled = false;
+		}
+	}
+
+	function cariBuku()
+	{
+		var searchinput = document.getElementById('searchinput');
+		var databuku = document.getElementById('databuku');
+		var ajax = new XMLHttpRequest();
+		ajax.onreadystatechange = function () {
+			if(ajax.readyState == 4 && ajax.status == 200)
+			{
+				databuku.innerHTML = ajax.responseText;
+			}
+		}
+		ajax.open('POST','<?=base_url()?>BukuController/ajaxCariBuku',true);
+		ajax.setRequestHeader('Content-type','Application/x-www-form-urlencoded');
+		ajax.send('keyword='+searchinput.value);
+	}
+
+</script>
+

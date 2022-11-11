@@ -41,6 +41,9 @@ class ModelAnggota extends CI_Model
 
 	public function delete($id)
 	{
+		$this->db->where($this->primaryKey, $id);
+		$anggota =  $this->db->get($this->table)->row();
+		unlink('./foto/'.$anggota->foto_anggota);
 		return $this->db->where($this->primaryKey, $id)->delete($this->table);
 	}
 }

@@ -27,27 +27,20 @@
 					<!-- /Logo -->
 					<?= $this->session->userdata('alert-login')  ?>
 					<?php $this->session->unset_userdata('alert-login');?>
-
-					<form id="formAuthentication" class="mb-3" action="<?= site_url('Login/proseslogin') ?>" method="POST">
+					<form id="formAuthentication" class="mb-3" action="<?= site_url('Login/prosesUbahPassword') ?>" method="POST">
 						<div class="mb-3">
 							<label for="username" class="form-label">Username</label>
 							<input
-								required
+								readonly
 								type="text"
 								class="form-control"
 								id="username"
 								name="username"
-								placeholder="Masukkan username anda"
-								autofocus
+								value="<?= $username ?>"
 							/>
 						</div>
 						<div class="mb-3 form-password-toggle">
-							<div class="d-flex justify-content-between">
-								<label class="form-label" for="password">Password</label>
-								<a onclick="forgotPassword()" href="#">
-									<small>Forgot Password?</small>
-								</a>
-							</div>
+							<label for="username" class="form-label">Password Baru</label>
 							<div class="input-group input-group-merge">
 								<input
 									required
@@ -61,14 +54,33 @@
 								<span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
 							</div>
 						</div>
+						<div class="mb-3 form-password-toggle">
+							<label for="username" class="form-label">Konfirmasi Password</label>
+							<div class="input-group input-group-merge">
+								<input
+									required
+									type="password"
+									id="password"
+									class="form-control"
+									name="password-konfirmasi"
+									placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+									aria-describedby="password"
+								/>
+								<span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+							</div>
+						</div>
 						<div class="mb-3">
-							<button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+							<label for="email" class="form-label">Kode Verifikasi</label>
+							<input required type="text" class="form-control" name="kode_verifikasi" placeholder="Masukkan kode verifikasi anda" />
+						</div>
+						<div class="mb-3">
+							<button class="btn btn-primary d-grid w-100" type="submit">Change Password</button>
 						</div>
 					</form>
 					<p class="text-center">
-						<span>Belum punya akun?</span>
-						<a href="<?= site_url("Login/akunbaru") ?>">
-							<span>Sign up Sekarang!</span>
+						<span>Sudah punya akun?</span>
+						<a href="<?= site_url("Login") ?>">
+							<span>Login sekarang!</span>
 						</a>
 					</p>
 				</div>
@@ -76,18 +88,6 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	function forgotPassword() {
-		var username = document.getElementById('username');
-		if (username.value === ''){
-			window.location.href = '<?=site_url()?>Login/usernameEmpty';
-		}else{
-			window.location.href = '<?=site_url()?>Login/lupaPassword/'+username.value;
-		}
-
-	}
-</script>
 
 <!-- / Content -->
 </body>

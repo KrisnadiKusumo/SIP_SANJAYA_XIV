@@ -22,9 +22,9 @@
 				<div class="container-xxl flex-grow-1 container-p-y">
 					<div class="card">
 						<div class="card-header">
-							<h2>Data Buku Dipinjam</h2>
-							<a href="<?= site_url('TransaksiController') ?>" class="btn btn-primary btn-sm">
-								<i class='bx bx-undo'></i>  Kembali
+							<h1>Data Buku Dipinjam</h1>
+							<a href="<?= site_url('TransaksiController') ?>" class="btn btn-primary">
+								<i class='bx bxs-share'></i>  Kembali
 							</a>
 						</div>
 						<div class="table-responsive text-nowrap">
@@ -84,12 +84,23 @@
 											?>
 										</td>
 										<td>
+											<?php
+											if ($d->status != ''){
+												$completed = '';
+											}else{
+												$completed = 'disabled';
+											}
+											?>
 											<a href="<?= site_url("TransaksiController/ubahDetail/$d->kode_detail") ?>" class="btn btn-warning btn-sm">
-												<i class='bx bx-edit'></i>
+												<i class="bx bx-edit"></i>
 											</a>
-											<a href="#" data-id="<?= $d->kode_detail ?>" class="btn btn-success btn-sm btn-delete-detail">
+											<a href="#" data-id="<?= $d->kode_detail ?>" class="btn btn-success btn-sm btn-delete-detail <?=$completed?>">
 												<i class="bx bx-recycle"></i>
 											</a>
+
+
+
+
 										</td>
 									</tr>
 									<?php
@@ -99,18 +110,29 @@
 							</table>
 						</div>
 					</div>
-					<div class="modal" id="modal-confirm-delete">
+					<div class="modal fade" id="modal-confirm-delete" tabindex="-1" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title">Apakah Buku Ini Benar-Benar Sudah Dikembalikan?</h5>
+									<h5 class="modal-title" id="modalCenterTitle">Apakah Buku Ini Sudah Dikembalikan?</h5>
+									<button
+										type="button"
+										class="btn-close"
+										data-bs-dismiss="modal"
+										aria-label="Close"
+									></button>
 								</div>
 								<div class="modal-body">
-
+									<div class="row">
+									</div>
+									<div class="row g-2">
+									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-info" data-dismiss="modal">Belum</button>
-									<button type="button" class="btn btn-danger" id="btn-delete">Sudah</button>
+									<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+										Belum
+									</button>
+									<button type="button" class="btn btn-success" id="btn-delete">Sudah</button>
 								</div>
 							</div>
 						</div>

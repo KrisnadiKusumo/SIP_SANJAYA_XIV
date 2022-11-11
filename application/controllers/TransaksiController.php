@@ -9,6 +9,8 @@ class TransaksiController extends CI_Controller {
 			redirect('Login');
 		}
 		$this->load->model("ModelTransaksi");
+		$this->load->model("ModelBuku");
+		$this->load->model("ModelAnggota");
 	}
 
 	public function index()
@@ -39,16 +41,38 @@ class TransaksiController extends CI_Controller {
 		$this->load->view('content/transaksi/listTransaksiActive', $data);
 	}
 
-	// untuk me-load tampilan form tambah barang
-
-	public function tambah(){
+	public function selesai()
+	{
+		$dataTransaksi = $this->ModelTransaksi->getAllSelesai();
 		$data = array(
+			"transaksis" => $dataTransaksi,
 			"isActive1" => '',
 			"isActive2" => '',
 			"isActive3" => '',
 			"isActive4" => '',
 			"isActive5" => 'active'
 		);
+		$this->load->view('content/transaksi/listTransaksiSelesai', $data);
+	}
+
+	// untuk me-load tampilan form tambah barang
+
+	public function tambah(){
+
+		$dataFiksi = $this->ModelBuku->getAllFiksi();
+		$dataAnggota = $this->ModelAnggota->getAll();
+		$noTrans = $this->ModelTransaksi->createNoTransaksi();
+		$data = array(
+			"isActive1" => '',
+			"isActive2" => '',
+			"isActive3" => '',
+			"isActive4" => '',
+			"isActive5" => 'active',
+			"anggotas" => $dataAnggota,
+			"fiksis" => $dataFiksi,
+			"kode_transaksi" => $noTrans
+		);
+
 		$this->load->view("content/transaksi/formTambahTransaksi", $data);
 	}
 
@@ -158,7 +182,8 @@ class TransaksiController extends CI_Controller {
 		$idT = $this->input->post('kode_transaksi');
 		$id = $this->input->post('kode_detail');
 		$data = array(
-			"tgl_pinjam" => $this->input->post("tgl_pinjam")
+			"tgl_pinjam" => $this->input->post("tgl_pinjam"),
+			"status" => 1
 		);
 		$this->ModelTransaksi->update($id, $data);
 		redirect('TransaksiController/detail/'.$idT);
@@ -175,4 +200,15 @@ class TransaksiController extends CI_Controller {
 		$this->ModelTransaksi->update($id, $data);
 		redirect('TransaksiController/detail/'.$kode_transaksi);
 	}
+
+	public function ajaxCariTransaksi()
+	{
+		$keyword = $this->input->post('keyword');
+		$this->db->like('nama_anggota',$keyword);
+		$this->db->or_like('kode_transaksi',$keyword);
+		$this->db->join('anggota','anggota.id_anggota = transaksi.id_anggota','left');
+		$data['transaksis'] = $this->db->get('transaksi')->result();
+		$this->load->view('content/transaksi/ajax/datatransaksi',$data);
+	}
+
 }

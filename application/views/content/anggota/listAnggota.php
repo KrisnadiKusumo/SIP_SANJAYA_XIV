@@ -22,10 +22,27 @@
 					<div class="container-xxl flex-grow-1 container-p-y">
 						<div class="card">
 							<div class="card-header">
-								<h2>Data Anggota</h2>
-								<a href="<?= site_url('AnggotaController/tambah') ?>" class="btn btn-primary btn-sm">
-									<i class='bx bxs-user-plus'></i>  Tambah Anggota
-								</a>
+								<h1>Data Anggota</h1>
+								<div class="d-flex justify-content-between">
+									<div class="button-wrapper">
+										<a href="<?= site_url('AnggotaController/tambah') ?>" class="btn btn-primary">
+											<i class='bx bxs-user-plus d-block d-sm-none'></i>
+											<span class="d-none d-sm-block">
+												<i class='bx bxs-user-plus'></i>
+												Tambah Anggota
+											</span>
+										</a>
+									</div>
+									<form class="d-flex" onsubmit="return false">
+										<input class="form-control me-2" onkeyup="success()" type="search" id="searchinput" placeholder="Cari... (ID / Nama)" aria-label="Search" />
+										<button onclick="cariAnggota()" class="btn me-2 btn-outline-primary btn-sm" type="submit" id="button" disabled>
+											<i class='bx bx-search-alt'></i>
+										</button>
+										<button onclick="refreshPage()" class="btn btn-outline-secondary btn-sm" type="submit">
+											<i class='bx bx-reset'></i>
+										</button>
+									</form>
+								</div>
 							</div>
 							<div class="table-responsive text-nowrap">
 								<table class="table table-striped">
@@ -38,50 +55,39 @@
 										<th>Action</th>
 									</tr>
 									</thead>
-									<tbody class="table-border-bottom-0">
-									<?php
-									$no = 1;
-									foreach ($anggotas as $a) {
-										?>
-										<tr>
-											<td><?= $no++ ?></td>
-											<td><?= $a->id_anggota  ?></td>
-											<td><?= $a->nama_anggota ?></td>
-											<td><?= $a->no_telp_anggota ?></td>
-											<td>
-												<a href="<?= site_url("AnggotaController/Detail/$a->id_anggota") ?>" class="btn btn-info btn-sm">
-													<i class='bx bxs-user-detail'></i>
-												</a>
-												<a href="<?= site_url("AnggotaController/ubah/$a->id_anggota") ?>" class="btn btn-warning btn-sm">
-													<i class="bx bx-edit"></i>
-												</a>
-												<a href="#" data-id="<?= $a->id_anggota ?>" class="btn btn-danger btn-sm btn-delete-anggota">
-													<i class="bx bx-trash"></i>
-												</a>
-											</td>
-										</tr>
-										<?php
-									}
-									?>
+									<tbody id="dataanggota" class="table-border-bottom-0">
+									<?php $this->load->view("content/anggota/ajax/dataAnggota",$anggotas) ?>
 									</tbody>
 								</table>
 							</div>
 						</div>
-					<div class="modal" id="modal-confirm-delete">
-						<div class="modal-dialog modal-dialog-centered">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title">Anda Yakin Ingin Hapus Data Ini?</h5>
-								</div>
-								<div class="modal-body">
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-info" data-dismiss="modal">Tidak</button>
-									<button type="button" class="btn btn-danger" id="btn-delete">Hapus</button>
+						<div class="modal fade" id="modal-confirm-delete" tabindex="-1" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="modalCenterTitle">Anda Yakin Ingin Hapus Data Ini?</h5>
+										<button
+											type="button"
+											class="btn-close"
+											data-bs-dismiss="modal"
+											aria-label="Close"
+										></button>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+										</div>
+										<div class="row g-2">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+											Tidak
+										</button>
+										<button type="button" class="btn btn-danger" id="btn-delete">Hapus</button>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 					<form id="form-delete" method="post" action="<?= site_url('AnggotaController/delete') ?>">
 					</form>
 				</div>
@@ -89,6 +95,7 @@
 			<?php $this->load->view('layout/footer'); ?>
 		</div>
 	</div>
+</div>
 </body>
 </html>
 <script>
@@ -111,4 +118,35 @@
 			$("#modal-confirm-delete").modal('hide');
 		});
 	})
+</script>
+
+<script>
+	function refreshPage(){
+		window.location.reload();
+	}
+
+	function success(){
+		if(document.getElementById("searchinput").value==="") {
+			document.getElementById('button').disabled = true;
+		} else {
+			document.getElementById('button').disabled = false;
+		}
+	}
+
+	function cariAnggota()
+	{
+		var searchinput = document.getElementById('searchinput');
+		var dataanggota = document.getElementById('dataanggota');
+		var ajax = new XMLHttpRequest();
+		ajax.onreadystatechange = function () {
+			if(ajax.readyState == 4 && ajax.status == 200)
+			{
+				dataanggota.innerHTML = ajax.responseText;
+			}
+		}
+		ajax.open('POST','<?=base_url()?>AnggotaController/ajaxCariAnggota',true);
+		ajax.setRequestHeader('Content-type','Application/x-www-form-urlencoded');
+		ajax.send('keyword='+searchinput.value);
+	}
+
 </script>

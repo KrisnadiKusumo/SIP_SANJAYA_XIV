@@ -25,30 +25,57 @@
 									<form id="form-tambah-buku" method="post" action="<?= site_url('TransaksiController/insert') ?>" enctype="multipart/form-data">
 										<div class="mb-3">
 											<label class="form-label">Kode Transaksi</label>
-											<input require type="text" class="form-control" name="kode_transaksi" placeholder="Masukkan Kode Transaksi" />
+											<input require readonly value="<?= $kode_transaksi ?>" type="text" class="form-control" name="kode_transaksi" placeholder="Masukkan Kode Transaksi" />
 										</div>
 										<div class="mb-3">
 											<label class="form-label">ID Anggota</label>
-											<input require type="text" class="form-control" name="id_anggota" placeholder="Masukkan ID Anggota" />
+											<select class="form-control" name="id_anggota">
+												<option disabled value="" selected>---  Pilih Anggota  ---</option>
+												<?php
+												foreach ($anggotas as $a) :
+													?>
+													<option value="<?= $a->id_anggota ?>"><?= $a->id_anggota ?> | <?= $a->nama_anggota ?></option>
+												<?php
+												endforeach;
+												?>
+											</select>
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Kode Buku</label>
-											<input require type="text" class="form-control" name="kode_buku" placeholder="Masukkan Kode Buku" />
+											<select class="form-control" name="kode_buku">
+											<option disabled value="" selected>---  Pilih Buku  ---</option>
+											<?php
+											foreach ($fiksis as $f) :
+												?>
+												<option value="<?= $f->kode_buku ?>"><?= $f->kode_buku ?> | <?= $f->judul_buku ?></option>
+											<?php
+											endforeach;
+											?>
+											</select>
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Kode Buku Ke-2</label>
-											<input require type="text" class="form-control" name="kode_buku2" placeholder="Masukkan Kode Buku 2 (Isi Jika Pinjam 2 Buku)" />
+											<select class="form-control" name="kode_buku">
+												<option disabled value="" selected>---  Pilih Buku  ---</option>
+												<?php
+												foreach ($fiksis as $f) :
+													?>
+													<option value="<?= $f->kode_buku ?>"><?= $f->kode_buku ?> | <?= $f->judul_buku ?></option>
+												<?php
+												endforeach;
+												?>
+											</select>
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Tanggal Pinjam</label>
-											<input require type="date" class="form-control" name="tgl_pinjam" placeholder="Masukkan Tanggal Pinjam" />
+											<input require value="<?php echo date('Y-m-d'); ?>" type="date" class="form-control" name="tgl_pinjam" placeholder="Masukkan Tanggal Pinjam" />
 										</div>
 									</form>
-									<button type="button" id="btn-save-buku" class="btn btn-success btn-sm">
+									<button type="button" id="btn-save-buku" class="btn btn-success">
 										<i class="bx bx-save"></i> Simpan
 									</button>
-									<a href="<?= site_url('TransaksiController') ?>" class="btn btn-primary btn-sm">
-										<i class="bx bx-undo"></i> Kembali
+									<a href="<?= site_url('TransaksiController') ?>" class="btn btn-outline-primary">
+										<i class="bx bxs-share"></i> Kembali
 									</a>
 								</div>
 							</div>

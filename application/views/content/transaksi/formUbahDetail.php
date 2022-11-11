@@ -33,16 +33,16 @@
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Tanggal Pinjam</label>
-											<input require type="date" class="form-control" name="tgl_pinjam" placeholder="Masukkan Tanggal Pinjam" />
+											<input require value="<?php echo date('Y-m-d'); ?>" type="date" class="form-control" name="tgl_pinjam" placeholder="Masukkan Tanggal Pinjam" />
 										</div>
 										<input require type="hidden" value="<?= $detail->kode_detail?>" class="form-control" name="kode_detail" />
 										<input require type="hidden" value="<?= $detail->kode_transaksi?>" class="form-control" name="kode_transaksi" />
 									</form>
-									<button type="button" id="btn-save-buku" class="btn btn-success btn-sm">
+									<button type="button" id="btn-save-buku" class="btn btn-success ">
 										<i class="bx bx-save"></i> Simpan
 									</button>
-									<a href="<?= site_url('TransaksiController') ?>" class="btn btn-primary btn-sm">
-										<i class="bx bx-undo"></i> Kembali
+									<a href="<?= site_url('TransaksiController/detail/'. $detail->kode_transaksi) ?>" class="btn btn-primary ">
+										<i class="bx bxs-share"></i> Kembali
 									</a>
 								</div>
 							</div>

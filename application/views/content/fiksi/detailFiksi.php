@@ -17,7 +17,7 @@
 		<div class="layout-page">
 			<div class="content-wrapper">
 				<div class="container-xxl flex-grow-1 container-p-y">
-					<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Form /</span> Ubah Buku Fiksi</h4>
+					<h4 class="fw-bold py-3 mb-4">Detail Buku Fiksi</h4>
 					<div class="row">
 						<div class="col-xl">
 							<div class="card mb-4">
@@ -33,64 +33,46 @@
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Judul Buku</label>
-											<input require type="text" value="<?= $buku->judul_buku?>" class="form-control" name="judul_buku" placeholder="Masukkan Judul Buku" />
+											<input require type="text" readonly value="<?= $buku->judul_buku?>" class="form-control" name="judul_buku" placeholder="Masukkan Judul Buku" />
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Pengarang Buku</label>
-											<input require type="text" value="<?= $buku->pengarang_buku?>" class="form-control" name="pengarang_buku" placeholder="Masukkan Pengarang Buku" />
+											<input require type="text" readonly value="<?= $buku->pengarang_buku?>" class="form-control" name="pengarang_buku" placeholder="Masukkan Pengarang Buku" />
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Penerbit Buku</label>
-											<input require type="text" value="<?= $buku->penerbit_buku?>" class="form-control" name="penerbit_buku" placeholder="Masukkan Penerbit Buku" />
+											<input require type="text" readonly value="<?= $buku->penerbit_buku?>" class="form-control" name="penerbit_buku" placeholder="Masukkan Penerbit Buku" />
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Tahun Terbit</label>
-											<select class="form-control" name="thn_terbit_buku">
-												<option selected value="<?=$buku->thn_terbit_buku?>">Pilih Tahun Terbit</option>';
-												<?php
-												for($year=date('Y'); $year>=2000; $year--){
-													echo '<option value="'.$year.'">'.$year.'</option>';
-												}
-												echo '</select>';
-												?>
+											<input require type="text" readonly value="<?= $buku->thn_terbit_buku?>" class="form-control" name="thn_terbit_buku" placeholder="Masukkan Penerbit Buku" />
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Bahasa Buku</label>
-											<select class="form-control" name="bahasa_buku" >
-												<option selected value="<?=$buku->bahasa_buku?>">Pilih Bahasa Buku</option>
-												<option value="asing" >Asing</option>
-												<option value="indonesia">Indonesia</option>
-											</select>
+											<input require type="text" readonly value="<?= $buku->bahasa_buku?>" class="form-control" name="bahasa_buku" placeholder="Masukkan Penerbit Buku" />
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Klasifikasi Buku</label>
-											<input require type="text" value="<?= $buku->klasifikasi_buku?>" class="form-control" name="klasifikasi_buku" placeholder="Masukkan Klasifikasi Buku" />
+											<input require type="text" readonly value="<?= $buku->klasifikasi_buku?>" class="form-control" name="klasifikasi_buku" placeholder="Masukkan Klasifikasi Buku" />
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Sumber Asal Buku</label>
-											<select class="form-control" name="sumber_asal_buku" >
-												<option selected value="<?=$buku->sumber_asal_buku?>">Pilih Asal Buku</option>
-												<option value="beli" > Beli</option>
-												<option value="bantuan">Bantuan</option>
-											</select>
+											<input require type="text" readonly value="<?= $buku->sumber_asal_buku?>" class="form-control" name="bahasa_buku" placeholder="Masukkan Penerbit Buku" />
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Harga Buku</label>
-											<input require type="number" value="<?= $buku->harga_buku?>" class="form-control" name="harga_buku" placeholder="Masukkan Harga Buku" />
+											<input require type="number" readonly value="<?= $buku->harga_buku?>" class="form-control" name="harga_buku" placeholder="Masukkan Harga Buku" />
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Jumlah Buku</label>
-											<input require type="number" value="<?= $buku->jumlah_buku?>" class="form-control" name="jumlah_buku" placeholder="Masukkan Jumlah Buku" />
+											<input require type="number" readonly value="<?= $buku->jumlah_buku?>" class="form-control" name="jumlah_buku" placeholder="Masukkan Jumlah Buku" />
+										</div>
+										<div class="mb-3">
+											<a href="<?= site_url('BukuController/fiksi') ?>" class="btn btn-primary">
+												<i class="bx bxs-share"></i> Kembali
+											</a>
 										</div>
 									</form>
-								<div class="mb-3">
-									<button type="button" id="btn-update-buku" class="btn btn-success">
-										<i class="bx bx-save"></i> Simpan
-									</button>
-									<a href="<?= site_url('BukuController/fiksi') ?>" class="btn btn-primary">
-										<i class="bx bxs-share"></i> Kembali
-									</a>
-								</div>
 							</div>
 						</div>
 					</div>

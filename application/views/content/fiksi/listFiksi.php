@@ -20,10 +20,27 @@
 				<div class="container-xxl flex-grow-1 container-p-y">
 					<div class="card">
 						<div class="card-header">
-							<h2>Data Buku Fiksi</h2>
-							<a href="<?= site_url('BukuController/tambahFiksi') ?>" class="btn btn-primary btn-sm">
-								<i class='bx bxs-book-add'></i>  Tambah Buku
-							</a>
+							<h1>Data Buku Fiksi</h1>
+							<div class="d-flex justify-content-between">
+								<div class="button-wrapper">
+									<a href="<?= site_url('BukuController/tambahFiksi') ?>" class="btn btn-primary">
+									<i class='bx bxs-book-add d-block d-sm-none'></i>
+										<span class="d-none d-sm-block">
+												<i class='bx bxs-book-add'></i>
+												Tambah Buku
+											</span>
+									</a>
+								</div>
+								<form class="d-flex" onsubmit="return false">
+									<input class="form-control me-2" onkeyup="success()" type="search" id="searchinput" placeholder="Cari... (Kode / Judul)" aria-label="Search" />
+									<button onclick="cariFiksi()" class="btn me-2 btn-outline-primary btn-sm" type="submit" id="button" disabled>
+										<i class='bx bx-search-alt'></i>
+									</button>
+									<button onclick="refreshPage()" class="btn btn-outline-secondary btn-sm" type="submit">
+										<i class='bx bx-reset'></i>
+									</button>
+								</form>
+							</div>
 						</div>
 						<div class="table-responsive text-nowrap">
 							<table class="table table-striped">
@@ -36,42 +53,34 @@
 									<th>Action</th>
 								</tr>
 								</thead>
-								<tbody class="table-border-bottom-0">
-								<?php
-								$no = 1;
-								foreach ($fiksis as $f) {
-									?>
-									<tr>
-										<td><?= $no++ ?></td>
-										<td><?= $f->kode_buku  ?></td>
-										<td><?= $f->judul_buku ?></td>
-										<td><?= $f->jumlah_buku ?></td>
-										<td>
-											<a href="<?= site_url("BukuController/ubahFiksi/$f->kode_buku") ?>" class="btn btn-warning btn-sm">
-												<i class="bx bx-edit"></i>
-											</a>
-											<a href="#" data-id="<?= $f->kode_buku ?>" class="btn btn-danger btn-sm btn-delete-buku">
-												<i class="bx bx-trash"></i>
-											</a>
-										</td>
-									</tr>
-									<?php
-								}
-								?>
+								<tbody id="datafiksi" class="table-border-bottom-0">
+								<?php $this->load->view("content/fiksi/ajax/dataFiksi",$fiksis) ?>
 								</tbody>
 							</table>
 						</div>
 					</div>
-					<div class="modal" id="modal-confirm-delete">
+					<div class="modal fade" id="modal-confirm-delete" tabindex="-1" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title">Anda Yakin Ingin Hapus Data Ini?</h5>
+									<h5 class="modal-title" id="modalCenterTitle">Anda Yakin Ingin Hapus Data Ini?</h5>
+									<button
+										type="button"
+										class="btn-close"
+										data-bs-dismiss="modal"
+										aria-label="Close"
+									></button>
 								</div>
 								<div class="modal-body">
+									<div class="row">
+									</div>
+									<div class="row g-2">
+									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-info" data-dismiss="modal">Tidak</button>
+									<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+										Tidak
+									</button>
 									<button type="button" class="btn btn-danger" id="btn-delete">Hapus</button>
 								</div>
 							</div>
@@ -106,4 +115,33 @@
 			$("#modal-confirm-delete").modal('hide');
 		});
 	})
+</script>
+<script>
+	function refreshPage(){
+		window.location.reload();
+	}
+
+	function success(){
+		if(document.getElementById("searchinput").value==="") {
+			document.getElementById('button').disabled = true;
+		} else {
+			document.getElementById('button').disabled = false;
+		}
+	}
+
+	function cariFiksi()
+	{
+		var searchinput = document.getElementById('searchinput');
+		var datafiksi = document.getElementById('datafiksi');
+		var ajax = new XMLHttpRequest();
+		ajax.onreadystatechange = function () {
+			if(ajax.readyState == 4 && ajax.status == 200)
+			{
+				datafiksi.innerHTML = ajax.responseText;
+			}
+		}
+		ajax.open('POST','<?=base_url()?>BukuController/ajaxCariFiksi',true);
+		ajax.setRequestHeader('Content-type','Application/x-www-form-urlencoded');
+		ajax.send('keyword='+searchinput.value);
+	}
 </script>
