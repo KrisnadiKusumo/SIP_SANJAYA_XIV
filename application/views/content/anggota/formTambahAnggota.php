@@ -119,7 +119,6 @@
 		})
 	})
 </script>
-<?php $this->load->view('layout/script'); ?>
 <script src="<?php base_url();?>assets/js/ui-toasts.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@ foreach ($bukus as $b) {
 	<tr>
 		<td><?= $no++ ?></td>
 		<td>
-			
+
 			<?= $b->jenis_buku  ?>
 		</td>
 		<td><?= $b->kode_buku  ?></td>

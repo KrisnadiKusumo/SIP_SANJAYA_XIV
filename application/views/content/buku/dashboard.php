@@ -172,3 +172,4 @@
 		<?php endif;?>
 	}
 </script>
+<script src="<?php base_url();?>assets/js/ui-toasts.js"></script>
